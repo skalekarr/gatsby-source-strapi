@@ -4,7 +4,7 @@ Source plugin for pulling documents into Gatsby from a Strapi API.
 
 ## Install
 
-`npm install --save gatsby-source-strapi`
+`npm install --save @skalekarr/gatsby-source-strapi`
 
 ## How to use
 
