@@ -24,6 +24,7 @@ plugins: [
         identifier: "",
         password: "",
       },
+      status: "Review"
     },
   },
 ]
