@@ -4,22 +4,24 @@ import pluralize from 'pluralize'
 
 module.exports = async ({ apiURL, contentType, singleType, jwtToken, queryLimit, reporter, status }) => {
   // Define API endpoint.
-  let apiBase = singleType ? `${apiURL}/${singleType}` : `${apiURL}/${pluralize(contentType)}`
+  status.map(async stat => {
+    let apiBase = singleType ? `${apiURL}/${singleType}` : `${apiURL}/${pluralize(contentType)}`
 
-  let apiEndpoint = `${apiBase}?_limit=${queryLimit}`
+    let apiEndpoint = `${apiBase}?_limit=${queryLimit}`
 
-  if (status) {
-    apiEndpoint = `${apiEndpoint}?_status=${status}`
-  }
+    if (stat) {
+      apiEndpoint = `${apiEndpoint}&_status=${stat}`
+    }
 
-  reporter.info(`Starting to fetch data from Strapi - ${apiEndpoint}`)
+    reporter.info(`Starting to fetch data from Strapi - ${apiEndpoint}`)
 
-  try {
-    const { data } = await axios(apiEndpoint, addAuthorizationHeader({}, jwtToken))
-    return castArray(data).map(clean)
-  } catch (error) {
-    reporter.panic(`Failed to fetch data from Strapi`, error)
-  }
+    try {
+      const { data } = await axios(apiEndpoint, addAuthorizationHeader({}, jwtToken))
+      return castArray(data).map(clean)
+    } catch (error) {
+      reporter.panic(`Failed to fetch data from Strapi`, error)
+    }
+  })
 }
 
 /**

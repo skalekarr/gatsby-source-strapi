@@ -1,6 +1,6 @@
 # gatsby-source-strapi
 
-Source plugin for pulling documents into Gatsby from a Strapi API.
+Source plugin for pulling documents into Gatsby from a Strapi API based on status forked from (strapi)[https://github.com/strapi/gatsby-source-strapi]
 
 ## Install
 
@@ -24,7 +24,7 @@ plugins: [
         identifier: "",
         password: "",
       },
-      status: "Review"
+      status: ["Review"]
     },
   },
 ]
